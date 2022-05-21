@@ -114,8 +114,8 @@ def splx_IP_mult(A, b, name="splc_IP_mult"):
     model.parameters.mip.pool.intensity.set(4)
     model.parameters.mip.pool.absgap.set(0)
     model.parameters.mip.pool.relgap.set(0)
-    model.parameters.mip.limits.populate.set((2**(2*m)))
-    model.parameters.mip.pool.capacity.set(2**(2**(m)))
+    model.parameters.mip.limits.populate.set((2**(2*(m-1))))
+    model.parameters.mip.pool.capacity.set(2**(2**(m-1)))
     return model, x
 
 def inc_bin(m):
