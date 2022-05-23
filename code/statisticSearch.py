@@ -6,30 +6,46 @@ import sys
 
 
 
-
 if __name__=="__main__":
-
     m = int(sys.argv[1])
-    j = int(sys.argv[2])
+    CONDITIONS_ADD = {}
+    CONDITIONS_ONE = {}
+    for i in range(1, m+1):
+        for j in range(1, m+1):
+            if i < j:
+                CONDITIONS_ADD[f'2^(m-{j}) <= b <= 2^(m-{i})'] = (2**(m-j),2**(m-i))
+        CONDITIONS_ONE[f"0 <= b <= 2^(m-{i})"] = 2**(m-i)
+
+
+    num_proc = int(sys.argv[2])
+    j = int(sys.argv[3])
+    print(f"Running iteration {str(j+1)}/{num_proc}")
     # print(m)
     # print(j)
     num_vars = 2**m - 1
     num_combos = int(2**num_vars)
     A = make_complete(m, dt=bool).astype(int)[:,1:]
     x = np.zeros(num_vars, dtype=int)
-    result_dict = { '2^(m-{}) <= b < 2^(m-{})'.format(k+1, k):0 for k in range(1, m)}
-    iter_length = int(num_combos/4)
+    result_dict = { k:0 for k in CONDITIONS_ADD.keys()}
+    for k in CONDITIONS_ONE.keys(): result_dict[k] = 0
+    iter_length = int(num_combos/num_proc)
+    print(f'Range: [{(j*iter_length)},{((j+1)*iter_length)})')
     for i in tqdm(range(j*iter_length, (j+1)*iter_length)):
         # j = i
 
         binary = numberToBase(i,2)
         x[num_vars - len(binary):] = binary
         b = A@x
-        if (np.all(b[1:]<=b[:-1])):
-            for k in range(1, m):
-                # print('2^(m-({}+1)) <= b < 2^(m-{})'.format(k+1, k))
-                if (np.all(2**(m-(k+1)) <= b) and np.all(b < 2**(m-k))):
-                    result_dict['2^(m-{}) <= b < 2^(m-{})'.format(k+1, k)] += 1
+        # if (np.all(b[1:]<=b[:-1])):
+        for (k, v) in CONDITIONS_ADD.items():
+            # print('2^(m-({}+1)) <= b < 2^(m-{})'.format(k+1, k))
+            if (np.all(v[0] <= b) and np.all(b <= v[1])):
+                result_dict[k] += 1
+        for (k, v) in CONDITIONS_ONE.items():
+            # print('2^(m-({}+1)) <= b < 2^(m-{})'.format(k+1, k))
+            if np.all(b <= v):
+                result_dict[k] += 1
+
 
     with open('ComputationalResults/ranges'+str(m)+'_'+str(j)+'.pkl', 'wb') as f:
         pickle.dump(result_dict, f)
