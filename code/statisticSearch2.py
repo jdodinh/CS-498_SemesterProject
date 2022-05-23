@@ -13,8 +13,9 @@ if __name__=="__main__":
     for i in range(1, m+1):
         for j in range(1, m+1):
             if i < j:
-                CONDITIONS_ADD[f'2^(m-{j}) <= b <= 2^(m-{i})'] = (2**(m-j),2**(m-i))
-        CONDITIONS_ONE[f"0 <= b <= 2^(m-{i})"] = 2**(m-i)
+                CONDITIONS_ADD[f'2^(m-{j}) <= b <= 2^(m-{i}), UB'] = (2**(m-j),2**(m-i), 'UB')
+                CONDITIONS_ADD[f'2^(m-{j}) <= b <= 2^(m-{i}), LB'] = (2 ** (m - j), 2 ** (m - i), 'LB')
+        CONDITIONS_ONE[f"0 <= b <= 2^(m-{i}), UB"] = (2**(m-i), 'UB')
 
 
     num_proc = int(sys.argv[2])
@@ -40,10 +41,17 @@ if __name__=="__main__":
         for (k, v) in CONDITIONS_ADD.items():
             # print('2^(m-({}+1)) <= b < 2^(m-{})'.format(k+1, k))
             if (np.all(v[0] <= b) and np.all(b <= v[1])):
-                result_dict[k] += 1
+                if v[2] == 'UB' and np.any(b == v[1]):
+                    # if np.any(b==v[1]):
+                    #     if (np.all(v[0] <= b) and np.all(b <= v[1]) and np.any(b==v[1])):
+                    result_dict[k] += 1
+                if v[2] == 'LB' and np.any(b == v[0]):
+                    # if np.any(b==v[0]):
+                    #     if (np.all(v[0] <= b) and np.all(b <= v[1])):
+                    result_dict[k] += 1
         for (k, v) in CONDITIONS_ONE.items():
             # print('2^(m-({}+1)) <= b < 2^(m-{})'.format(k+1, k))
-            if np.all(b <= v):
+            if np.all(b <= v[0]) and np.any(b == v[0]):
                 result_dict[k] += 1
 
 
