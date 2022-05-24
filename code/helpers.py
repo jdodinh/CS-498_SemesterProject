@@ -63,8 +63,8 @@ def splx_int(b, A=None):
     for i in range(m):
         model.add_constraint(sum([x[j]*A[i, j] for j in range(2**m-1)]) == b[i])
 
-    obj_fun = sum(x)
-    model.set_objective("min", obj_fun)
+    # obj_fun = sum(x)
+    # model.set_objective("min", obj_fun)
     return model, x
 
 def splx_int_trunc(b, A=None):

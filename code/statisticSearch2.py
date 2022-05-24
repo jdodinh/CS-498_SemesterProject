@@ -27,7 +27,7 @@ if __name__=="__main__":
     num_combos = int(2**num_vars)
     A = make_complete(m, dt=bool).astype(int)[:,1:]
     x = np.zeros(num_vars, dtype=int)
-    result_dict = { k:0 for k in CONDITIONS_ADD.keys()}
+    result_dict = {k:0 for k in CONDITIONS_ADD.keys()}
     for k in CONDITIONS_ONE.keys(): result_dict[k] = 0
     iter_length = int(num_combos/num_proc)
     print(f'Range: [{((j-1)*iter_length)},{((j)*iter_length)})')

@@ -4,6 +4,7 @@ import numpy as np
 import pickle
 import sys
 
+## Code made to calculate the number of linear combos that yield a RHS that falls within a specified range
 
 
 if __name__=="__main__":
