@@ -1,0 +1,22 @@
+\begin{thebibliography}{Koz92}
+
+\bibitem[EW20]{Eisenbrand:277936}
+Friedrich Eisenbrand and Robert Weismantel.
+\newblock Proximity results and faster algorithms for integer programming using
+  the steinitz lemma.
+\newblock {\em Acm Transactions On Algorithms}, 16(1):5, 2020.
+
+\bibitem[Kar72]{Karp1972}
+Richard~M. Karp.
+\newblock Reducibility among combinatorial problems.
+\newblock In {\em Complexity of Computer Computations: Proceedings of a
+  symposium on the Complexity of Computer Computations}, pages 85--103.
+  Springer US, Boston, MA, 1972.
+
+\bibitem[Koz92]{Kozen1992}
+Dexter~C. Kozen.
+\newblock More np-complete problems.
+\newblock In {\em The Design and Analysis of Algorithms}, pages 122--127.
+  Springer New York, New York, NY, 1992.
+
+\end{thebibliography}
