@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022/Homebrew) (preloaded format=pdflatex 2022.5.27)  10 JUN 2022 16:57
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022/Homebrew) (preloaded format=pdflatex 2022.5.27)  11 DEC 2022 17:38
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1724,7 +1724,7 @@ Overfull \hbox (18.3301pt too wide) in paragraph at lines 611--656
 Here is how much of TeX's memory you used:
  29053 strings out of 478268
  721703 string characters out of 5837861
- 1204639 words of memory out of 5000000
+ 1203532 words of memory out of 5000000
  46807 multiletter control sequences out of 15000+600000
  484780 words of font info for 85 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
@@ -1767,7 +1767,7 @@ ar/texlive/20220321/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb>
 </usr/local/Cellar/texlive/20220321/share/texmf-dist/fonts/type1/public/amsfont
 s/cm/cmtt8.pfb></usr/local/Cellar/texlive/20220321/share/texmf-dist/fonts/type1
 /public/amsfonts/symbols/msbm10.pfb>
-Output written on CS-498_report.pdf (12 pages, 374888 bytes).
+Output written on CS-498_report.pdf (12 pages, 374965 bytes).
 PDF statistics:
  202 PDF objects out of 1000 (max. 8388607)
  124 compressed objects within 2 object streams

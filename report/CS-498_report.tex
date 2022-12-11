@@ -117,7 +117,7 @@ funcfont=sanserif]{complexity}
 \begin{document}
 \maketitle
 \begin{abstract}
-    Integer Programming is a widely studied topic in the fields of Computer Science  and Mathematics. Often results are derived for particular instances of integer programs, such as standard forms. We impose further restrictions by having our constraint matrix be the complete matrix, which if fixed for an input of a given size. The restricted nature of our problem opens the door for analysis of approaches to solving the problem which may be more direct and fine-tuned to the problem at hand, as well as the investigation of how the problem behaves given varied inputs. We explore this through a varied set of approaches to understand how solving it and determining feasibility ranges based on the instance of the problem.
+    Integer Programming is a widely studied topic in the fields of Computer Science  and Mathematics. Often results are derived for particular instances of integer programs, such as standard forms. We impose further restrictions by having our constraint matrix be the complete matrix, which is fixed for an input of a given size. The restricted nature of our problem opens the door for analysis of approaches to solving the problem which may be more direct and fine-tuned to the problem at hand, as well as the investigation of how the problem behaves given varied inputs. We explore this through a varied set of approaches to understand how solving it and determining feasibility ranges based on the instance of the problem.
 \end{abstract}
 
 % Introduction
@@ -125,7 +125,7 @@ funcfont=sanserif]{complexity}
 % Main Results
 
 \section{Introduction}
-General Integer Program feasibility, can be seen as decision problems with inputs corresponding to a matrix $ A \in \mathbb{Z}^{m\times n} $ and a right hand side $ b \in \mathbb{Z}^m $, where the decision is about whether there exists a binary vector $ x $ such that $ Ax = b $. Solving such programs requires us to further output a valid solution. The problem explored here, yields many analogies to the general case, however with an additional restriction imposed on the matrix $ A $, by restricting it to be the complete matrix. The specific nature of out problem is described below.
+General Integer Program feasibility, can be seen as decision problems with inputs corresponding to a matrix $ A \in \mathbb{Z}^{m\times n} $ and a right hand side $ b \in \mathbb{Z}^m $, where the decision is about whether there exists a binary vector $ x $ such that $ Ax = b $. Solving such programs requires us to further output a valid solution. The problem explored here, yields many analogies to the general case, however with an additional restriction imposed on the matrix $ A $, by having it to be the complete matrix. The specific nature of our problem is described below.
 
 \subsection{The Complete Matrix}
 In our problem, the notion of the Complete Matrix is essential, and therefore we give its definition. 
@@ -185,11 +185,11 @@ On another topic, adding an objective function makes this an Integer Linear Prog
   with $ A \in  \mathbb{Z}^{m \times n}, b \in \mathbb{Z}^m, c \in \mathbb{Z}^n$ can be solved in time $ (m \cdot \Delta)^{O(m)}\cdot \norm{b}_\infty^2 $. Here $ \Delta $ is the upper bound on each absolute value in $ A $ (which in our case is 1). Much of the power of this result comes from the fact that the worst case time doesn't depend on the number of variables (which in our case increases exponentially with the size of the input). In this project, less algorithmic approaches were investigated, with the hope that results can more directly be obtained due to the strict definition of our problem (and in particular the complete matrix).
 %which is known to be \NP-complete \cite{Karp1972}.
 
-Our problem can also be made easier, through the consideration of the LP relaxation, where we allow $x \in \left[0, 1\right]^{2^m}$. Investigating how the fractional solutions relate to integral solutions is interesting both in regards of obtaining the solution and feasibility. We can ask whether a fractional solution necessarily implies an integral one, however this is beyond the scope of this project.
+Our problem can also be made easier, through the consideration of the LP relaxation, where we allow $x \in \left[0, 1\right]^{2^m}$. Investigating how the fractional solutions relate to integral solutions is interesting both with regards of obtaining the solution and feasibility. We can ask whether a fractional solution necessarily implies an integral one, however this is beyond the scope of this project.
 \subsection{Intuitions regarding the set of feasible right hand sides}
 We seek to find a decomposition of each right hand side into a sum of distinct binary vectors of $m$ bits.
 
-Firstly, we might highlight the fact that the ordering of the entries in the right hand side has no implication on the feasibility of the solution. In fact, if we are able to find a solution for the sorted right hand side $b_\text{sort}$, we can derive the solution for the original $b$ through a relabeling of variables.
+Firstly, we might highlight the fact that the ordering of the entries in the right hand side has no implication on the feasibility of the solution. In fact, if we are able to find a solution for a sorted right hand side $b_\text{sort}$, we can derive the solution for the original $b$ through a relabeling of variables.
 
 A direct implication of the nature of the complete matrices is that the set $F \in \mathbb{N}^m$ of feasible right hand sides is a subset of $\left[2^{m-1}+1\right]^m$.\footnotemark{} \footnotetext{For $n \in \mathbb{N}^*$, we use the notation $[n]$ for the set $\{0, 1, 2, \dots, n-1\}$} For $m>1$, this inclusion is strict. In particular, any vector with all zero entries, except a single entry strictly greater than $1$ is infeasible. 
 
@@ -258,7 +258,7 @@ It may be that the $u''$ obtained might not be minimal w.r.t to the maximal deco
 \end{adjustwidth}
 This result is useful especially given the fact that each feasible right hand side can be associated with a unique minimal feasible $u$. On top of this, we can partition all feasible right hand sides into subsets that are indexed by their minimal feasible $u$.
 
-For instance, let's assume that we are given an oracle $O_M$ that on input $ u $ can quickly tell us, if a given right hand side is minimal feasible, and on top of this, another oracle $O_S$ that on input $(u, i)$ can tell us quickly if a support minimal solution to $ \mathbf{A}x = u $ uses less than $ i $ columns from $ \mathbf{A} $.  Then, given a right hand side $b$, we can run the following algorithm to determine feasibility:
+Additionally, let's assume that we are given an oracle $O_M$ that on input $ u $ can quickly tell us, if $ u $ is minimal feasible, and on top of this, another oracle $O_S$ that on input $(u, i)$ can tell us quickly if a support minimal solution to $ \mathbf{A}x = u $ uses less than $ i $ columns from $ \mathbf{A} $.  Then, given a right hand side $b$, we can run the following algorithm to determine feasibility:
 
 \IncMargin{2em}
 \begin{algorithm}
@@ -296,9 +296,9 @@ To obtain the results for the \textit{Number of linear combinations} column, all
 
 To obtain the results for the \textit{Number of feasible RHS}, the set $\left[2^{m-1}+1\right] ^m$ was enumerated, and for each element of this set, the feasibility was checked with the use of the CPLEX module from IBM. 
 
-Using these results, it was possible to obtain some statistics such as the average amount of linear combinations per RHS in a particular range, or the proportion of RHS that are in a particular range out of all possible RHS, and similarly for the linear combinations. Those measures are represented in the three entailing columns in the tables. 
+Using these results, it was possible to obtain some statistics such as the average amount of linear combinations per RHS in a particular range, or the proportion of RHS that are in a particular range out of all possible RHS, and similarly for the linear combinations. Those measures are represented in the three entailing columns of the tables. 
 
-Another measure taken from the enumeration of all possible linear combinations, was the counting of the number of solutions that yield a RHS with a particular $\ell_1$ norm. Below are the plots for $m=4$ and $m=5$:
+Another measure taken from the enumeration of all possible linear combinations, was a count of the number of solutions that yield a RHS with a particular $\ell_1$ norm. Below are the plots for $m=4$ and $m=5$:
 
 \begin{tikzpicture}[scale=0.8]
 \begin{axis} [ybar,xmin=0,xmax=32,ymin=0,ymax=3000,
@@ -441,7 +441,7 @@ title={\# of lin. combos. for a given $\ell_1$ norm for $m=5$}
 \end{tikzpicture}
 It can be seen from the bar graphs that the highest number of linear combinations yield a right hand side $b$ whose $\ell_1$ norm is $16$ and $40$ for $m=4$ and $m=5$ respectively. It may seem that for any $m$, these values correspond to $m\cdot2^{m-2}$. 
 
-In fact, let $ \mathcal{C}(\mathbf{A}_m) $ be the set of columns of $ \mathbf{A}_m $. Then if we uniformly and at random pick subsets of columns $C \in \mathcal{C}(\mathbf{A}_m) $, and let our random variable be the $ \ell_1 $ norm of the resulting right hand side, we have that the expected value of this variable would exactly be $m\cdot2^{m-2}$:
+In fact, let $ \mathcal{C}(\mathbf{A}_m) $ be the set of columns of $ \mathbf{A}_m $. Then if we uniformly and at random pick subsets of columns $C \subseteq \mathcal{C}(\mathbf{A}_m) $, and let our random variable be the $ \ell_1 $ norm of the resulting right hand side, we have that the expected value of this variable would exactly be $m\cdot2^{m-2}$:
 \begin{align*}
 \mathbb{E}\left[\norm{b}_1\right] &= 2^{-m}\mathbb{E}\Bigg[\sum_{C \subseteq \mathcal{C}(\mathbf{A}_m)} \underbrace{\sum_{c \in C} \norm{c}_1}_{\substack{\ell_1 \text{ of RHS} \\ \text{created by } C}}\Bigg]  \\
 &= 2^{-m}\sum_{C \subseteq \mathcal{C}(\mathbf{A}_m)}\sum_{c \in C} \mathbb{E}\left[\norm{c}_1\right]\\
@@ -452,7 +452,7 @@ In fact, let $ \mathcal{C}(\mathbf{A}_m) $ be the set of columns of $ \mathbf{A}
 &= m \cdot 2^{m-2}.
 \end{align*}
 
-Which is the expected $ \ell_1 $ of the right hand side given the complete matrix, if we were to pick subsets of columns uniformly and at random. This explains why the number of combinations per $ \ell_1 $ norm symmetrically spread around $ m  \cdot 2^{m-2}$. The full list of values that yield those charts can be found in Appendix 2.
+Which is the expected $ \ell_1 $ of the right hand side given the complete matrix, if we were to pick subsets of columns uniformly and at random. This explains why the number of combinations per $ \ell_1 $ norm is symmetrically spread around $ m  \cdot 2^{m-2}$. The full list of values that yield those charts can be found in Appendix 2.
 
 Unfortunately, coming up with these charts for $ m>5 $ is computationally expensive. Since already for $ m=5 $, we have $ 2^{31} $ linear combination to iterate through, getting a result for any higher value of $ m $ is not likely to terminate quickly. 
 
@@ -460,9 +460,9 @@ These charts however suggest that based on the $ \ell_1 $ norm of the RHS, we ca
 
 
 \subsection{Sensitivity}
-In this section we are interested in knowing whether the $\ell_1$ norm of the difference between two distinct right hand sides $b$ and $b'$ can tell us about the difference in the support of their solution. That is whether for all solutions $x$ and $x'$ to $\mathbf{A}x = b$ and $\mathbf{A}x = b'$ respectively, it necessarily holds that $\norm{x-x'}_1 \leq p(m)\norm{b-b'}_1$.
+In this section we are interested in knowing whether the $\ell_1$ norm of the difference between two distinct right hand sides $b$ and $b'$ can tell us about the difference in the support of their solution. That is whether for all solutions $x$ and $x'$ to $\mathbf{A}x = b$ and $\mathbf{A}x = b'$ respectively, it necessarily holds that $\norm{x-x'}_1 \leq p(m)\norm{b-b'}_1$ for some function $ p $.
 
-Unfortunately, we have managed to show an example of when the sensitivity is large, therefore negating the above argument. Namely that there exists a $b$ and a solution to $\mathbf{A}x = b$, and another rhs $b'$ such that all solutions to $\mathbf{A}x = b'$ are far away from $x$. We elaborate on the example below.
+Unfortunately, we have managed to show an example when the sensitivity is large, therefore negating the above argument. Namely that there exists a $b$ and a solution to $\mathbf{A}x = b$, and another rhs $b'$ such that all solutions to $\mathbf{A}x = b'$ are far away from $x$. We elaborate on the example below.
 
 For any $m$ consider the following right hand side:
 \[
@@ -479,9 +479,9 @@ b' = \begin{bmatrix}
 2^{m-1} \\ 2^{m-2} \\ \vdots \\ 2^{m-2}
 \end{bmatrix}.
 \]
-We have that $\norm{b - b'} = 1$, and we observe that to satisfy the first entry of this right hand side, we are forced to pick all the columns of $\mathbf{A}_m$ that have a 1 in the first entry. However, picking all of those columns already satisfies $b'$ and furthermore it is the unique solution to $b'$. Moreover, it means that all of the $m-1$ unit vectors used in our solution to $b$ cannot be in the support. We have that $\norm{x - x'} = m$, which provides an example for when the sensitivity is large. 
+We have that $\norm{b - b'}_1 = 1$, and we observe that to satisfy the first entry of this right hand side, we are forced to pick all the columns of $\mathbf{A}_m$ that have a 1 in the first entry. However, picking all of those columns already satisfies $b'$ and furthermore it is the unique solution to $b'$. Moreover, it means that all of the $m-1$ unit vectors used in our solution to $b$ cannot be in the support. We have that $\norm{x - x'} = m$, which provides an example for when the sensitivity is large. 
 
-This sensitivity result shows that we cannot rely on knowledge of results for particular right hand sides to derive a solution to another right hand side that is close with respect to the $\ell_1$ norm. In the worst case it is possible to have to change over $m$ columns in the support, which is computationally expensive. 
+This sensitivity result shows that we cannot necessarily rely on knowledge of results for particular right hand sides to derive a solution to another right hand side that is close with respect to the $\ell_1$ norm. In the worst case it is possible to have to change over $m$ columns in the support, which is computationally expensive. 
 % \begin{bmatrix}
 % 2^{m-1}-1 \\ 2^{m-2} - 1 \\ \vdots \\ 2^{m-2} - 1
 % \end{bmatrix}
@@ -495,9 +495,9 @@ That is, given $b$, we would like to find some bound $l_b \leq \norm{x}_1 \leq u
 
 A trivial value for $l_{b}$ is of course $b_{\max}$, the maximal entry in the right hand side. This follows from the fact, that in order to satisfy the value $b_{\max}$ in the right hand side, we must choose at least $b_{\max}$ columns in our support. 
 
-On the other hand, a trivial value for $ l_{u} $ would of course be $ \norm{b}_1 $, because this indicate the worst case scenario where on average for each column $ c $ in the support, it we would have that $ \norm{c}_1 = 1 $.
+On the other hand, a trivial value for $ u_{b} $ would of course be $ \norm{b}_1 $, because this indicates the worst case scenario where on average for each column $ c $ in the support, we would have that $ \norm{c}_1 = 1 $.
 
-There of course exist examples of right hand sides, where these bounds are tight, such as for instance $ b = \mathbf{1} $, where we have that $ b_{\max} = 1 $ and $ \norm{b}_1 = m $. For those there exist solutions $ x_l $ and $ x_u $ consisting with $ \norm{x_l}_1 = 1 $ and $\norm{x_u} = m $. Namely, for $ x_l  $ we choose the all 1 column of $ \mathbf{A} $, and for $ x_u $ we choose the $ m $ unit vectors. 
+There of course exist examples of right hand sides, where these bounds are tight, such as for instance $ b = \mathbf{1} $, where we have that $ b_{\max} = 1 $ and $ \norm{b}_1 = m $. For those there exist solutions $ x_l $ and $ x_u $ with $ \norm{x_l}_1 = 1 $ and $\norm{x_u} = m $. Namely, for $ x_l  $ we choose the all 1 column of $ \mathbf{A} $, and for $ x_u $ we choose the $ m $ unit vectors. 
 
 The derivation for better proximity bounds is not a subject that was further investigated in this project, and is the reason for which it's mentioned in the scope of future work. We are optimistic that some tighter bound can be derived, that leverage the nature of the RHS in a more thorough manner. 
 
